@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="AgentSearch Challenge">
+  <meta name="keywords" content="AI agents, information retrieval, SIGIR, workshop, agent search, ranking, indexing">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AgentSearch Challenge</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <style>
+    :root { --organiser-img-size: 128px; }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">AgentSearch Challenge</h1>
+          <h2 class="title is-4 publication-title"> <a href="https://agent-search.github.io/agentsearch-sigir26/">AgentSearch Workshop @ SIGIR 2026 &nbsp;·&nbsp; Melbourne | Naarm, Australia</a></h2>
+                    <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Workhop Link. -->
+              <span class="link-block">
+                <a href="https://agent-search.github.io/agentsearch-sigir26/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <p style="font-size:18px">🌍</p>
+                  </span>
+                  <span>Workshop</span>
+                </a>
+              </span>
+              <!-- Benchmark Webpage Link. -->
+              <span class="link-block">
+                <a href="https://bingo-w.github.io/AgentSearchBench"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <p style="font-size:18px">🌐</p>
+                  </span>
+                  <span>Benchmark</span>
+                  </a>
+                </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/AgentSearch"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <p style="font-size:18px">🤗</p>
+                  </span>
+                  <span>Dataset</span>
+                  </a>
+                </span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+      <h3 class="title is-3">Overview</h3>
+      <div class="content has-text-justified">
+        <p>
+          The AgentSearch challenge tackles a critical emerging problem in the agentic AI landscape: given a task description, how do you reliably find and rank the best agent for the job? As the ecosystem of AI agents grows rapidly; spanning diverse providers, capabilities, and specialisations, the ability to discover the right agent at the right time becomes a foundational infrastructure challenge.
+        </p>
+        <p>
+          This shared task explores <strong>agent search in the wild</strong> by evaluating retrieval and reranking methods against execution-grounded performance signals <strong>across nearly 10,000 real-world agents</strong> drawn from multiple providers. Recent studies have shown that semantic similarity alone is insufficient for identifying high-performing agents. Yet it remains an open question which retrieval approaches best capture true agent utility, which ranking signals most reliably predict execution performance, whether execution-aware signals can close the gap between semantic similarity and actual task success, and how well current methods generalise across diverse task types and agent providers. This challenge is designed to systematically investigate these questions.
+        </p>
+        <p>
+          The challenge consists of two complementary tracks:
+        </p>
+        <ul>
+          <li><strong>Track 1: Retrieval</strong> – Given a natural language task description, participants develop methods to retrieve the most relevant agents from a large-scale pool. This track evaluates the ability to surface strong candidate agents efficiently and accurately.</li>
+          <li><strong>Track 2: Reranking</strong> – Given a retrieved set of candidate agents, participants develop methods to rerank them using execution-aware signals, contextual features, and agent metadata. This track focuses on closing the gap between surface-level relevance and true task performance.</li>
+        </ul>
+        <p>
+          Together, the tracks provide the first comprehensive benchmark for agent search, offering the community a shared foundation for developing and comparing principled methods at the intersection of information retrieval and agentic systems.
+        </p>
+      </div>
+
+        <br/>
+
+        <h3 class="title is-4">Files</h3>
+        <div class="content has-text-justified">
+          <p>We release the data for AgentSearchBench on <a href="https://huggingface.co/AgentSearch">HuggingFace Datasets</a>. You can also access the data from <a href="https://drive.google.com/drive/folders/1821MfvwzCsTH22IkWwApnkkoeUz9UVTa?usp=sharing">Google Drive</a>.
+          </p>
+
+          <p>To download the validation set:</p>
+          <pre><code>from datasets import load_dataset 
+ds = load_dataset("AgentSearch/AgentSearchBench-Tasks", "single-agent_task_query", split="validation")
+ds = load_dataset("AgentSearch/AgentSearchBench-Tasks", "multi-agent_task_query", split="validation")
+ds = load_dataset("AgentSearch/AgentSearchBench-Tasks", "task_description", split="validation")</code></pre>
+                    
+          <p>To download the test set:</p>
+          <pre><code>from datasets import load_dataset 
+ds = load_dataset("AgentSearch/AgentSearchBench-Tasks", "single-agent_task_query", split="test")
+ds = load_dataset("AgentSearch/AgentSearchBench-Tasks", "multi-agent_task_query", split="test")
+ds = load_dataset("AgentSearch/AgentSearchBench-Tasks", "task_description", split="test")</code></pre>
+
+          Here is a brief description of dataset columns:
+          <ul>
+            <li><strong>id</strong>: Unique identifier for each task.</li>
+            <li><strong>task</strong>: Task content.</li>
+            <li><strong>labels</strong>: Binary retrieval labels.</li>
+            <li><strong>ranking_labels</strong>: Graded ranking labels.</li>
+            <li><strong>ref_agents</strong>: Reference agents used to generate the task.</li>
+            <li><strong>ref_subtasks</strong>: Associated subtasks (multi-agent task query and task description).</li>
+            <li><strong>rubric</strong>: Subtask selection rubric (task description only).</li>
+          </ul>
+
+        <p>To download the agentbase dataset:</p>
+        <pre><code>from datasets import load_dataset
+ds = load_dataset("AgentSearch/AgentSearchBench-Agents")
+df = pd.DataFrame(ds["agents"])</code></pre>
+
+        <p>Our benchmarking tasks were generated from execution traces from 2 of the available platforms. You <strong>MUST</strong> use the same version of the agentbase dataset for the challenge.</p>
+        <pre>active_platforms = ["agentainetwork", "openaiagents"]
+agentbase_executable_df = df[df["platform_name"].isin(active_platforms)]</pre>
+        </pre>
+
+        </div>
+
+        <h3 class="title is-4">Submission Instructions</h3>
+        <div class="content has-text-justified">
+          <p>
+            You will need to register your team when you are submitting your results using the following <a href="https://docs.google.com/forms/d/e/1FAIpQLSdl5ZaZtFsVizMjfHzCjjOTR0remle4IREAFTbRIJdKAsdxtg/viewform?usp=publish-editor">Google Form</a>.
+            Participants will submit lists of relevant agent ids per query using a standard IR-style format. Teams may submit multiple runs, and reproducibility submissions are encouraged.
+          </p>
+
+          <h4>Retrieval Track Submission</h4>
+          <p> Binary relevance labels (0 or 1) should be provided for each task in the test set in a JSONL file.</p>
+<pre>{"q:0": {"agt:openaiagents:55dad6@v1.1": 1}}
+{"q:1": {"agt:openaiagents:b950b8@v1.1": 1, "agt:openaiagents:d40350@v1.1": 1, "agt:openaiagents:626021@v1.1": 1}}
+{"q:2": {"agt:agentainetwork:2d0fdc@v1.1": 1, "agt:openaiagents:011a48@v1.1": 1}}</pre>
+
+          <h4>Reranking Track Submission</h4>
+
+          <p> Graded ranking labels should be provided for each task in the test set in a JSONL file.
+            Our reranking track focuses on <strong>top 20</strong> agents per task.
+          </p>
+<pre>{"q:0": {"agt:openaiagents:55dad6@v1.1": 7, "agt:openaiagents:55dad6@v1.1": 6, ...}}
+{"q:1": {"agt:openaiagents:b950b8@v1.1": 10, "agt:openaiagents:d40350@v1.1": 5, "agt:openaiagents:626021@v1.1": 3, ...}}
+{"q:2": {"agt:agentainetwork:2d0fdc@v1.1": 3, "agt:openaiagents:011a48@v1.1": 2}, ...}</pre>
+        </div>
+
+        <h3 class="title is-4">Challenge Organisers</h3>
+        <div class="columns is-multiline">
+
+          <div class="column is-one-third">
+            <div class="card">
+              <div class="card-content has-text-centered">
+                <figure class="image" style="width:var(--organiser-img-size);height:var(--organiser-img-size);margin: 0 auto 0.75rem;">
+                  <img class="is-rounded" src="static/organisers/arastun-mammadli.jpg" alt="Arastun Mammadli" style="width:var(--organiser-img-size);height:var(--organiser-img-size);object-fit:cover;">
+                  <!-- <div style="width:var(--organiser-img-size);height:var(--organiser-img-size);border-radius:50%;background:#e0e0e0;margin:0 auto;"></div> -->
+                </figure>
+                <p class="title is-5 mb-1">Arastun Mammadli</p><br>
+                <p class="subtitle is-6 mb-2">University College London</p>
+                <a target="_blank" href="https://www.linkedin.com/in/arastun-mammadli-068ab0228/" rel="noreferrer">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-one-third">
+            <div class="card">
+              <div class="card-content has-text-centered">
+                <figure class="image" style="width:var(--organiser-img-size);height:var(--organiser-img-size);margin: 0 auto 0.75rem;">
+                  <img class="is-rounded" src="static/organisers/bin-wu.jpg" alt="Bin Wu" style="width:var(--organiser-img-size);height:var(--organiser-img-size);object-fit:cover;">
+                </figure>
+                <p class="title is-5 mb-1">Bin Wu</p><br>
+                <p class="subtitle is-6 mb-2">University College London</p>
+                <a target="_blank" href="https://www.linkedin.com/in/bin-wu-a915601a5/" rel="noreferrer">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-one-third">
+            <div class="card">
+              <div class="card-content has-text-centered">
+                <figure class="image" style="width:var(--organiser-img-size);height:var(--organiser-img-size);margin: 0 auto 0.75rem;">
+                  <img class="is-rounded" src="static/organisers/emine-yilmaz.jpg" alt="Emine Yilmaz" style="width:var(--organiser-img-size);height:var(--organiser-img-size);object-fit:cover;">
+                </figure>
+                <p class="title is-5 mb-1">Emine Yilmaz</p><br>
+                <p class="subtitle is-6 mb-2">University College London & Amazon</p>
+                <a target="_blank" href="https://www.linkedin.com/in/emine-yilmaz-978b937/" rel="noreferrer">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is website adapted from <a href="https://nerfies.github.io/">Nerfies</a>, licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
